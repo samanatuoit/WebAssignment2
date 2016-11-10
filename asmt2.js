@@ -1,6 +1,6 @@
 console.log("Hello, world");
 
-function downloadForecast(latitude, longitude) {
+function downloadWeather(latitude, longitude) {
 
     var openweather = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&units=metric&APPID=cf8109e5d810d65b28498fe929e763cf";
     $.getJSON(openweather, function (data) {
@@ -33,8 +33,34 @@ function downloadForecast(latitude, longitude) {
 
 }
 
-function downloadWeather(latitude, longitude) {
-    
+function downloadForecast(latitude, longitude) {
+    var rawXML = "http://api.openweathermap.org/data/2.5/forecast/daily?cnt=10&mode=xml&lat=" + latitude + "&lon=" + longitude + "&units=metric&APPID=cf8109e5d810d65b28498fe929e763cf";
+    var parser = new DOMParser();
+    //var xmlDoc = $.parseXML(rawXML);
+    //console.log(xmlDoc);
+
+
+    $.get(rawXML, function(xmlDoc) {
+        $(xmlDoc).find('forecast').each(function() {
+            result = $(this).find('time').attr('day');
+            console.log("result = " + result);
+        })
+
+
+
+    })
+    $.get(rawXML, function (xmlDoc) {
+        $(xmlDoc).find('time').each(function() {
+            result2 = $(this).attr('day');
+            console.log(result2);
+            $('tbody').append('<tr>');
+            $('tbody').append('<td>' + result2 + '</td>');
+            $('tbody').append('</tr>');
+
+        })
+
+    })
+
 }
 
 $(document).ready(function () {
@@ -44,6 +70,7 @@ $(document).ready(function () {
         var latitude = document.getElementById('lat').value;
         var longitude = document.getElementById('lon').value;
 
+        downloadWeather(latitude, longitude);
         downloadForecast(latitude, longitude);
 
 
