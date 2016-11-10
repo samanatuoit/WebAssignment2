@@ -1,4 +1,8 @@
 #weather {
     background-color: lightblue;
+    border: 1px solid black;
 
+}
+#output {
+    list-style: none;
 }
