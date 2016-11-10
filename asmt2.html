@@ -2,24 +2,50 @@
 <html>
 <head>
     <title>Consuming Web Services</title>
-    <script type="text/javascript" src="http://code.jquery.com/jquerylatest.min.js"></script>
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=<YOUR GOOGLE API KEY GOES
 HERE>"></script>
-    <script type="text/javascript" src="asmt2.js"></script>
-    <link rel="stylesheet" href="asmt2.css" />
+    <link rel="stylesheet" href="asmt2.css"/>
 </head>
 <body>
 <div id="form">
     Latitude/longitude:
-    <input type="text" name="lat" id="lat" value="43.944847" />
-    <input type="text" name="lon" id="lon" value="-78.891703" />
+    <input type="text" name="lat" id="lat" value="43.944847"/>
+    <input type="text" name="lon" id="lon" value="-78.891703"/>
     <button id="goButton">Go</button>
 </div>
 <div class="container-fluid">
     <div id="map-canvas" class="col-sm-6"></div>
-    <div id="weather" class="col-sm-4 col-sm-offset-1"></div>
+    <div id="weather" class="col-sm-4 col-sm-offset-1">
+        <ul id="output">
+
+
+        </ul>
+
+
+    </div>
     <div id="forecast" class="col-sm-11"></div>
 </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+      crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="asmt2.js"></script>
 </body>
+<!-- Latest compiled and minified CSS -->
+
+
 </html>
