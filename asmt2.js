@@ -23,7 +23,20 @@ function downloadWeather(latitude, longitude) {
         var pressure = data.main.pressure;
         var humidity = data.main.humidity;
 
-
+        // setup initial box
+        outputjquery.empty();
+/*
+        outputjquery.append('<li><h3>Temperature</h3></li>');
+        outputjquery.append('<li>Current: </li>');
+        outputjquery.append('<li>Low: </li>');
+        outputjquery.append('<li>High: </li>');
+        outputjquery.append('<li><h3>Outlook</h3></li>');
+        outputjquery.append('<li><h3>Wind:</h3></li>');
+        outputjquery.append('<li>Direction:</li>');
+        outputjquery.append('<li>Speed:</li>');
+        outputjquery.append('<li><h3>Pressure</h3></li>');
+        outputjquery.append('<li><h3>Humidity</h3></li>');
+*/
         outputjquery.append('<li><h3>Temperature</h3></li>');
         outputjquery.append('<li>Current: ' + currentTemp + '&deg;C</li>');
         outputjquery.append('<li>Low: ' + lowTemp + '&deg;C</li>');
@@ -53,6 +66,10 @@ function downloadForecast(latitude, longitude) {
     var windArray = [];
     var cloudsArray = [];
     var tableBodySelector = $('tbody');
+
+    // clean up the table before adding new entries
+    tableBodySelector.empty();
+
     //var xmlDoc = $.parseXML(rawXML);
     //console.log(xmlDoc);
 
@@ -117,6 +134,89 @@ function downloadForecast(latitude, longitude) {
         console.log("windArray after xmlDoc = " + windArray);
         console.log("cloudsArray after xmlDoc = " + cloudsArray);
 
+
+        // change all symbol codes to corresponding image links
+        for (var i = 0; i < symbolArray.length; i++) {
+            switch(symbolArray[i]) {
+                case "200":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\200.png\'>";
+                    break;
+                case "201":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\201.png\'>";
+                    break;
+                case "203":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\203.png\'>";
+                    break;
+                case "210":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\210.png\'>";
+                    break;
+                case "211":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\211.png\'>";
+                    break;
+                case "212":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\212.png\'>";
+                    break;
+                case "300":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\300.png\'>";
+                    break;
+                case "301":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\301.png\'>";
+                    break;
+                case "302":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\302.png\'>";
+                    break;
+                case "303":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\303.png\'>";
+                    break;
+                case "304":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\304.png\'>";
+                    break;
+                case "500":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\500.png\'>";
+                    break;
+                case "501":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\501.png\'>";
+                    break;
+                case "502":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\502.png\'>";
+                    break;
+                case "503":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\503.png\'>";
+                    break;
+                case "504":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\504.png\'>";
+                    break;
+                case "600":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\600.png\'>";
+                    break;
+                case "601":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\601.png\'>";
+                    break;
+                case "602":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\602.png\'>";
+                    break;
+                case "800":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\800.png\'>";
+                    break;
+                case "801":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\801.png\'>";
+                    break;
+                case "802":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\802.png\'>";
+                    break;
+                case "803":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\803.png\'>";
+                    break;
+                case "804":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\804.png\'>";
+                    break;
+                case "NA":
+                    symbolArray[i] = "<img height=\'42\' src=\'.\\images\\NA.png\'>";
+                    break;
+
+            }
+        }
+
         for (var i = 0; i < dateArray.length; i++) {
             tableBodySelector.append('<tr>');
             tableBodySelector.append('<td>' + dateArray[i] + '</td>');
@@ -172,7 +272,7 @@ $(document).ready(function () {
         console.log("GO button pressed");
         var latitude = document.getElementById('lat').value;
         var longitude = document.getElementById('lon').value;
-        var testArray;
+        //var testArray;
 
         downloadWeather(latitude, longitude);
         downloadForecast(latitude, longitude);
