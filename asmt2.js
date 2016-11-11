@@ -23,20 +23,8 @@ function downloadWeather(latitude, longitude) {
         var pressure = data.main.pressure;
         var humidity = data.main.humidity;
 
-        // setup initial box
+        // cleanup the box before adding new values
         outputjquery.empty();
-/*
-        outputjquery.append('<li><h3>Temperature</h3></li>');
-        outputjquery.append('<li>Current: </li>');
-        outputjquery.append('<li>Low: </li>');
-        outputjquery.append('<li>High: </li>');
-        outputjquery.append('<li><h3>Outlook</h3></li>');
-        outputjquery.append('<li><h3>Wind:</h3></li>');
-        outputjquery.append('<li>Direction:</li>');
-        outputjquery.append('<li>Speed:</li>');
-        outputjquery.append('<li><h3>Pressure</h3></li>');
-        outputjquery.append('<li><h3>Humidity</h3></li>');
-*/
         outputjquery.append('<li><h3>Temperature</h3></li>');
         outputjquery.append('<li>Current: ' + currentTemp + '&deg;C</li>');
         outputjquery.append('<li>Low: ' + lowTemp + '&deg;C</li>');
@@ -58,7 +46,6 @@ function downloadWeather(latitude, longitude) {
 
 function downloadForecast(latitude, longitude) {
     var rawXML = "http://api.openweathermap.org/data/2.5/forecast/daily?cnt=10&mode=xml&lat=" + latitude + "&lon=" + longitude + "&units=metric&APPID=cf8109e5d810d65b28498fe929e763cf";
-    //var parser = new DOMParser();
     var dateArray = [];
     var symbolArray = [];
     var highTempArray = [];
@@ -70,40 +57,14 @@ function downloadForecast(latitude, longitude) {
     // clean up the table before adding new entries
     tableBodySelector.empty();
 
-    //var xmlDoc = $.parseXML(rawXML);
-    //console.log(xmlDoc);
-
-
-    /*$.get(rawXML, function (xmlDoc) {
-     $(xmlDoc).find('forecast').each(function () {
-     result = $(this).find('time').attr('day');
-     console.log("result = " + result);
-     })
-
-
-     });*/
     $.get(rawXML, function (xmlDoc) {
         $(xmlDoc).find('time').each(function () {
             var result = $(this).attr('day');
-            /*
-             $('tbody').append('<tr>');
-             $('tbody').append('<td>' + result + '</td>');
-             $('tbody').append('</tr>');
-             */
-
-
-            // result2 = $(this).attr('day');
-            //console.log("result = " + result);
             dateArray.push(result);
-            //console.log("result = " + result);
-            //console.log(dateArray);
-
-
         });
 
         $(xmlDoc).find('symbol').each(function () {
             var result = $(this).attr('number');
-            //console.log("symbol result = " + result);
             symbolArray.push(result);
         });
 
@@ -228,29 +189,7 @@ function downloadForecast(latitude, longitude) {
             tableBodySelector.append('</tr>');
         }
 
-        /*$.get(rawXML, function (xmlDoc) {
-         $(xmlDoc).find('symbol').each(function () {
-         var result = $(this).attr('number');
-         console.log("symbol result = " + result);
-         symbolArray.push(result);
-         })
-         });
-         */
-
-
     });
-    /*console.log("dateArray.length = " + dateArray.length);
-     console.log(Array.isArray(dateArray));
-     console.log(dateArray[0]);
-     console.log(dateArray);*/
-    /*for (var i = 0; i < dateArray.length; i++) {
-     console.log("Adding..." + i);
-     $('tbody').append('<tr>');
-     $('tbody').append('<td>' + result + '</td>');
-     $('tbody').append('</tr>');
-     }*/
-    //return dateArray;
-
 }
 
 function showMap(latitude, longitude) {
@@ -267,20 +206,13 @@ function showMap(latitude, longitude) {
 }
 $(document).ready(function () {
     console.log("ready!");
-    //jQuery.ajaxSetup({async:false});
     $('#goButton').click(function () {
         console.log("GO button pressed");
         var latitude = document.getElementById('lat').value;
         var longitude = document.getElementById('lon').value;
-        //var testArray;
 
         downloadWeather(latitude, longitude);
         downloadForecast(latitude, longitude);
         showMap(latitude, longitude);
-        /*console.log("testArray.length = " + testArray.length);
-         console.log(testArray);
-         */
-
-
     })
 });
