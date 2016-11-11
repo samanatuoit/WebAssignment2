@@ -3,6 +3,13 @@
     border: 1px solid black;
 
 }
+
 #output {
     list-style: none;
 }
+
+#map-canvas {
+    height: 300px;
+    width: 300px;
+}
+

@@ -1,3 +1,12 @@
+/*
+
+ Name: Saman Yaghini
+ Student ID: 100286511
+
+ Name: Vincent (Dai) Chan
+ Student ID: 100554446
+
+ */
 console.log("Hello, world");
 
 function downloadWeather(latitude, longitude) {
@@ -110,12 +119,12 @@ function downloadForecast(latitude, longitude) {
 
         for (var i = 0; i < dateArray.length; i++) {
             tableBodySelector.append('<tr>');
-            tableBodySelector.append('<td>' + dateArray[i] +'</td>');
-            tableBodySelector.append('<td>' + symbolArray[i] +'</td>');
-            tableBodySelector.append('<td>' + highTempArray[i] +'</td>');
-            tableBodySelector.append('<td>' + lowTempArray[i] +'</td>');
-            tableBodySelector.append('<td>' + windArray[i] +'</td>');
-            tableBodySelector.append('<td>' + cloudsArray[i] +'</td>');
+            tableBodySelector.append('<td>' + dateArray[i] + '</td>');
+            tableBodySelector.append('<td>' + symbolArray[i] + '</td>');
+            tableBodySelector.append('<td>' + highTempArray[i] + '</td>');
+            tableBodySelector.append('<td>' + lowTempArray[i] + '</td>');
+            tableBodySelector.append('<td>' + windArray[i] + '</td>');
+            tableBodySelector.append('<td>' + cloudsArray[i] + '</td>');
             tableBodySelector.append('</tr>');
         }
 
@@ -144,6 +153,18 @@ function downloadForecast(latitude, longitude) {
 
 }
 
+function showMap(latitude, longitude) {
+    var map;
+    initMap();
+    function initMap() {
+        console.log("latitude = " + latitude);
+        console.log("longitude = " + longitude);
+        map = new google.maps.Map(document.getElementById('map-canvas'), {
+            center: {lat: parseFloat(latitude), lng: parseFloat(longitude)},
+            zoom: 8
+        })
+    }
+}
 $(document).ready(function () {
     console.log("ready!");
     //jQuery.ajaxSetup({async:false});
@@ -155,6 +176,7 @@ $(document).ready(function () {
 
         downloadWeather(latitude, longitude);
         downloadForecast(latitude, longitude);
+        showMap(latitude, longitude);
         /*console.log("testArray.length = " + testArray.length);
          console.log(testArray);
          */
